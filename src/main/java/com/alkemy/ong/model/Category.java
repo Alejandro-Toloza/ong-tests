@@ -1,33 +1,40 @@
 package com.alkemy.ong.model;
-
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "categories")
 @Getter
 @Setter
 @SQLDelete(sql = "UPDATE categories SET deleted = true WHERE id=?")
-@Where(clause = "softDelete=false")
+@Where(clause = "deleted=false")
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+
+    @NotNull(message = "User name cannot not be empty")
     private String name;
-    @Column(name = "description")
+
     private String description;
-    @Column(name = "image")
     private String image;
-    @Column(name = "timestamps")
-    private LocalDate timestamps;
-    @Column(name = "soft_delete")
-    private boolean softDelete = Boolean.FALSE;
+
+    @Column(name = "creation_date")
+    @CreationTimestamp
+    private Timestamp creationDate;
+
+    @Column(name = "update_date")
+    @UpdateTimestamp
+    private Timestamp updateDate;
+
+    private boolean deleted = Boolean.FALSE;
 
 }

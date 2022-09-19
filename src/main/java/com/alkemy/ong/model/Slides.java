@@ -1,5 +1,4 @@
 package com.alkemy.ong.model;
-
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -9,14 +8,15 @@ import javax.persistence.*;
 @Getter @Setter
 public class Slides {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "organization_id")
-    private Long organizationId;
-    @Column(name = "image_url")
-    private String imageUrl;
-    @Column(name = "text_img")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String image;
     private String text;
-    @Column(name = "order_img")
-    private int order;
+    private int orders;
+
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    private Organization organizationId;
 
 }
