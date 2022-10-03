@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("categories")
@@ -26,6 +25,12 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<CategoryDTO> save(@RequestBody CategoryDTO dto){
         CategoryDTO dtoSave = categoryService.save(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dtoSave);
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<CategoryDTO> save2(@RequestBody CategoryDTO dto){
+        CategoryDTO dtoSave = categoryService.save2(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(dtoSave);
     }
 

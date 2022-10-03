@@ -3,6 +3,7 @@ package com.alkemy.ong.service.Impl;
 import com.alkemy.ong.dto.CategoryDTO;
 import com.alkemy.ong.exception.ParamNotFound;
 import com.alkemy.ong.mapper.CategoryMapper;
+import com.alkemy.ong.mapper.ICategoryMapper;
 import com.alkemy.ong.model.Category;
 import com.alkemy.ong.repository.CategoryRepository;
 import com.alkemy.ong.service.CategoryService;
@@ -20,6 +21,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryMapper categoryMapper;
 
+    @Autowired
+    ICategoryMapper icatMapper;
+
     @Override
     public List<CategoryDTO> getAll() {
         List<Category> categoryList = categoryRepository.findAll();
@@ -33,6 +37,15 @@ public class CategoryServiceImpl implements CategoryService {
         Category saveCategory = categoryRepository.save(category);
         CategoryDTO dtoResult = categoryMapper.category2DTO(saveCategory);
         return dtoResult;
+    }
+
+    //TODO: METODO USANDO MAPSTRUCKT - FUNCIONA
+    @Override
+    public CategoryDTO save2(CategoryDTO dto) {
+        Category category = icatMapper.categoryDTOToCategory(dto);
+        Category saveCategory = categoryRepository.save(category);
+        CategoryDTO result = icatMapper.categoryToCategoryDTO(saveCategory);
+        return result;
     }
 
     @Override
