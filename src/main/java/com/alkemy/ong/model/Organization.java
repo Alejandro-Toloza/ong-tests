@@ -34,6 +34,12 @@ public class Organization {
     private String address;
 
     private Integer phone;
+    @Column(name = "url_linkedin")
+    private String urlLinkedin;
+    @Column(name = "url_facebook")
+    private String urlFacebook;
+    @Column(name = "url_instagram")
+    private String urlInstagram;
 
     @NotNull(message = "User email cannot not be empty")
     private String email;
@@ -55,9 +61,6 @@ public class Organization {
     @Column(name="update_date")
     private LocalDateTime updateDate;
 
-    // TODO: return social networks in the response
-    private String url_linkedin;
-    private String url_facebook;
-    private String url_instagram;
+
 
 }
