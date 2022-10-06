@@ -1,4 +1,4 @@
-package com.alkemy.ong.service.Impl;
+package com.alkemy.ong.service.impl;
 
 import com.alkemy.ong.dto.OrganizationBasicDTO;
 import com.alkemy.ong.dto.OrganizationDTO;
